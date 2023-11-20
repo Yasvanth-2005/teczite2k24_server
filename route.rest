@@ -1,0 +1,224 @@
+POST http://localhost:3001/admin/events/new
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTdhMjc4YzQzMTk2MGM4YzgyMDIwYyIsImlhdCI6MTcwMDI0MjY0NX0.ZNIubnBHP_oluGgBDP6sz2NLDlMbGz6VnnTMpw0FSWk
+
+{
+  "eveID": "TZPUC-001",
+  "eveName": "Deafaut",
+  "eveDepartment": "CSE",
+  "eveImg": "image-url.jpg",
+  "about": "This is a coding competition.",
+  "structure": "Structure details...",
+  "timeline": "Timeline details...",
+  "rules": "Competition rules...",
+  "TeamSize": 1,
+  "contact_info": "Contact information...",
+  "isRegistrationsOpened": true
+}
+### 
+POST http://localhost:3001/admin/auth/register
+Content-Type: application/json
+
+{
+  "name": "Admin Nam",
+  "email": "admin@exmple.com",
+  "password": "password123",
+  "department": "CSE",
+  "role": "admin"
+}
+
+###login ##POST http://localhost:3001/auth/login
+POST http://localhost:3001/admin/auth/login
+Content-Type: application/json
+
+{
+  "name": "Admin Name",
+  "email": "admin@example.com",
+  "password": "password123"
+}
+
+### Create New Notification
+POST http://localhost:3001/admin/notifications/new
+Content-Type: application/json
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTdhMjc4YzQzMTk2MGM4YzgyMDIwYyIsImlhdCI6MTcwMDMyMjQ4Mn0.O3Zpz8d2PG-QhqVUmV3NwlCDbxnwY4OCl_2WQ8Hi8HI
+
+{
+  "date": "2023-11-30T12:00:00.000Z",
+  "heading": "Sample Heading reent",
+  "info": "Sample Ifo",
+  "picturePath": "https://samle-url.com/sample-image.jpg",
+  "link": "https://sampleurl.com"
+}
+
+### Update a Notification by ID
+PUT http://localhost:3001/admin/notifications/6558dce3a96598ac8792af69
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTdhMjc4YzQzMTk2MGM4YzgyMDIwYyIsImlhdCI6MTcwMDI0MjY0NX0.ZNIubnBHP_oluGgBDP6sz2NLDlMbGz6VnnTMpw0FSWk
+
+{
+  "date": "2023-11-30T12:00:00.000Z",
+  "heading": "Sample Heading",
+  "info": "Sample Info",
+  "picturePath": "https:/le-url.com/sample-image.jpg",
+  "link": "https://sample-url.com"
+}
+
+### Delete a Notification by ID
+DELETE http://localhost:3001/admin/notifications/6557ad64075432f384d50fc1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTdhMjc4YzQzMTk2MGM4YzgyMDIwYyIsImlhdCI6MTcwMDI0MjY0NX0.ZNIubnBHP_oluGgBDP6sz2NLDlMbGz6VnnTMpw0FSWk
+
+###get notifications ####
+GET http://localhost:3001/admin/notifications/all
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTdhMjc4YzQzMTk2MGM4YzgyMDIwYyIsImlhdCI6MTcwMDI0MjY0NX0.ZNIubnBHP_oluGgBDP6sz2NLDlMbGz6VnnTMpw0FSWk
+
+###get notifications ####
+GET http://localhost:3001/admin/notifications/single
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTdhMjc4YzQzMTk2MGM4YzgyMDIwYyIsImlhdCI6MTcwMDI0MjY0NX0.ZNIubnBHP_oluGgBDP6sz2NLDlMbGz6VnnTMpw0FSWk
+
+###event routres##
+
+### Create a new event ###
+
+
+### Get all events ###
+GET http://localhost:3001/admin/events/all-events
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTdhMjc4YzQzMTk2MGM4YzgyMDIwYyIsImlhdCI6MTcwMDI0MjY0NX0.ZNIubnBHP_oluGgBDP6sz2NLDlMbGz6VnnTMpw0FSWk
+
+
+### Get a single event by ID ###
+GET http://localhost:3001/admin/events/event/655794dd64bc6fa76233711a
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTdhMjc4YzQzMTk2MGM4YzgyMDIwYyIsImlhdCI6MTcwMDI0MjY0NX0.ZNIubnBHP_oluGgBDP6sz2NLDlMbGz6VnnTMpw0FSWk
+# Replace :id with the actual ID of the event
+
+### Edit an event by ID ###
+PUT http://localhost:3001/admin/events/edit-event/655794dd64bc6fa76233711a
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTdhMjc4YzQzMTk2MGM4YzgyMDIwYyIsImlhdCI6MTcwMDI0MjY0NX0.ZNIubnBHP_oluGgBDP6sz2NLDlMbGz6VnnTMpw0FSWk
+
+{
+  "eveID":"xxx",
+  "eveName": "Updated Event Name",
+  "eveDepartment": "Updated Department",
+  "eveImg": "updated_image_url",
+  "about": "Updated event description",
+  "structure": "Updated event structure",
+  "timeline": "Updated event timeline",
+  "rules": "Updated event rules",
+  "TeamSize": 4,
+  "contact_info": "Updated contact information",
+  "isRegistrationsOpened": false
+}
+
+###hdsf##
+POST http://localhost:3001/user/events/register-event
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTVhZjY4OGQwYmZmNWZmYjIwMTNlOWQiLCJpYXQiOjE3MDA0NjI1MDQsImV4cCI6MTcwMDQ2NjEwNH0.tnfLV3vqxmVJldTrkf21Cx8LZSZWR4_cUrA2n_EZolo
+
+{
+  "eventId": "TZPUC01",
+  "studentIds": ["TZ2024000"]
+}
+
+
+###sd###
+##3GWTINFG ###
+GET http://localhost:3001/user/events/event/655882f9895cfeca0dd2f116
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTVhZjY4OGQwYmZmNWZmYjIwMTNlOWQiLCJpYXQiOjE3MDA0NjI1MDQsImV4cCI6MTcwMDQ2NjEwNH0.tnfLV3vqxmVJldTrkf21Cx8LZSZWR4_cUrA2n_EZolo
+
+###343##
+POST http://localhost:3001/admin/workshops/new
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTdhMjc4YzQzMTk2MGM4YzgyMDIwYyIsImlhdCI6MTcwMDI0MjY0NX0.ZNIubnBHP_oluGgBDP6sz2NLDlMbGz6VnnTMpw0FSWk
+
+{
+  "sno": 4,
+  "workshopName": "Updated Workshop Name",
+  "workshopDept": "Updated Department",
+  "about": "Updated workshop description",
+  "workshopImg": "updated-image.jpg",
+  "structure": "Updated workshop structure",
+  "isRegistrationsOpened": true,
+  "contact": "Updated contact info",
+  "instructorName": "Updated Instructor Name",
+  "instructorSpecifications": "Updated Instructor Specifications",
+  "instructorImage": "updated-instructor-image.jpg"
+}
+
+
+### Workshops Routes ###
+
+# Get all workshops
+GET http://localhost:3001/admin/workshops/all-workshops
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTdhMjc4YzQzMTk2MGM4YzgyMDIwYyIsImlhdCI6MTcwMDI0MjY0NX0.ZNIubnBHP_oluGgBDP6sz2NLDlMbGz6VnnTMpw0FSWk
+
+
+###Get a specific workshop by ID
+GET http://localhost:3001/admin/workshops/65588defeda61855625e305f
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTdhMjc4YzQzMTk2MGM4YzgyMDIwYyIsImlhdCI6MTcwMDI0MjY0NX0.ZNIubnBHP_oluGgBDP6sz2NLDlMbGz6VnnTMpw0FSWk
+
+
+### Edit a workshop by ID
+PUT http://localhost:3001/admin/workshops/edit-workshop/65588defeda61855625e305f
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTdhMjc4YzQzMTk2MGM4YzgyMDIwYyIsImlhdCI6MTcwMDI0MjY0NX0.ZNIubnBHP_oluGgBDP6sz2NLDlMbGz6VnnTMpw0FSWk
+
+{
+  "sno": 10,
+  "workshopName": "Updated Workshop Name",
+  "workshopDept": "Updated Department",
+  "about": "Updated workshop description",
+  "workshopImg": "updated-image.jpg",
+  "structure": "Updated workshop structure",
+  "isRegistrationsOpened": true,
+  "contact": "Updated contact info",
+  "instructorName": "Updated Instructor Name",
+  "instructorSpecifications": "Updated Instructor Specifications",
+  "instructorImage": "updated-instructor-image.jpg"
+}
+
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTdhMjc4YzQzMTk2MGM4YzgyMDIwYyIsImlhdCI6MTcwMDI0MjY0NX0.ZNIubnBHP_oluGgBDP6sz2NLDlMbGz6VnnTMpw0FSWk
+###Get all workshops
+GET http://localhost:3001/user/workshops/all-workshops
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTVhZjY4OGQwYmZmNWZmYjIwMTNlOWQiLCJpYXQiOjE3MDA0NjI1MDQsImV4cCI6MTcwMDQ2NjEwNH0.tnfLV3vqxmVJldTrkf21Cx8LZSZWR4_cUrA2n_EZolo
+
+###Get a specific workshop by ID
+GET http://localhost:3001/user/workshops/65588defeda61855625e305f
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTVhZjY4OGQwYmZmNWZmYjIwMTNlOWQiLCJpYXQiOjE3MDA0NjI1MDQsImV4cCI6MTcwMDQ2NjEwNH0.tnfLV3vqxmVJldTrkf21Cx8LZSZWR4_cUrA2n_EZolo
+
+###get notifications ####
+GET http://localhost:3001/user/notifications/all
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTVhZjY4OGQwYmZmNWZmYjIwMTNlOWQiLCJpYXQiOjE3MDA0NjI1MDQsImV4cCI6MTcwMDQ2NjEwNH0.tnfLV3vqxmVJldTrkf21Cx8LZSZWR4_cUrA2n_EZolo
+
+
+
+###get notifications ####
+GET http://localhost:3001/user/notifications/single
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTVhZjY4OGQwYmZmNWZmYjIwMTNlOWQiLCJpYXQiOjE3MDA0NjI1MDQsImV4cCI6MTcwMDQ2NjEwNH0.tnfLV3vqxmVJldTrkf21Cx8LZSZWR4_cUrA2n_EZolo
+
+
+
+###
+POST http://localhost:3001/user/auth/register
+Content-Type: application/json
+
+{
+  "email": "er@examp]ecm",
+  "name": "User",
+  "password": "userpassword",
+  "collegeId": "123456",
+  "referredBy": "userId_if_applicable"
+}
+
+
+###
+POST http://localhost:3001/user/auth/login
+Content-Type: application/json
+
+{
+  "email": "er@examp]ecm",
+  "password": "userpassword"
+}
+
+
+
+
