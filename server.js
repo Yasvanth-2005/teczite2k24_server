@@ -18,7 +18,7 @@ import usereventsRoutes from "./routes/userevents.js";
 import workshopRoutes from "./routes/workshop.js";
 import userworkshopRoutes from "./routes/userworkshop.js";
 import usernotifyRoutes from "./routes/usernotify.js";
-import userauthRoutes from './routes/userauth.js'
+import userauthRoutes from "./routes/userauth.js";
 
 import { newEventUpload } from "./controllers/admin/Events.js";
 import { newWorkshopUpload } from "./controllers/admin/Workshop.js";
@@ -37,8 +37,6 @@ app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
 app.use("/assets", express.static(path.join(__dirname, "public/assets")));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
 
 /* FILE STORAGE */
 const storage = multer.diskStorage({
@@ -84,18 +82,14 @@ app.post(
   NewNotify
 );
 
-
-
 /* ROUTES */
 app.use("/admin/auth", authRoutes);
 app.use("/admin/notifications", verifyToken, notifyRoutes);
 app.use("/admin/events", verifyToken, eventsRoutes);
 app.use("/admin/workshops", verifyToken, workshopRoutes);
 
-
-
 /* User Routes */
-app.use("/user/auth",userauthRoutes);
-app.use("/user/notifications",verifyUserToken, usernotifyRoutes);
-app.use("/user/events",verifyUserToken, usereventsRoutes);
-app.use("/user/workshops",verifyUserToken, userworkshopRoutes);
+app.use("/user/auth", userauthRoutes);
+app.use("/user/notifications", verifyUserToken, usernotifyRoutes);
+app.use("/user/events", verifyUserToken, usereventsRoutes);
+app.use("/user/workshops", verifyUserToken, userworkshopRoutes);
