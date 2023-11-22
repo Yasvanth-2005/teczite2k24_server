@@ -10,8 +10,8 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  password:{
-   type:String,
+  password: {
+    type: String,
   },
   collegeId: {
     type: String,
@@ -19,19 +19,23 @@ const UserSchema = new mongoose.Schema({
   referredBy: {
     type: String,
   },
+  onBoarded: {
+    type: Boolean,
+    default: false,
+  },
   referrals: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'User',
+      ref: "User",
     },
   ],
   RegisteredEvents: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Event', 
+      ref: "Event",
     },
   ],
 });
 
-const User = mongoose.model('User', UserSchema);
+const User = mongoose.model("User", UserSchema);
 export default User;

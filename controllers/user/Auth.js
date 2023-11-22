@@ -38,7 +38,8 @@ export const register = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
-/* LOGGING IN */export const login = async (req, res) => {
+
+/* LOGGING IN */ export const login = async (req, res) => {
   try {
     const { email, password } = req.body;
 
@@ -46,19 +47,19 @@ export const register = async (req, res) => {
     const user = await User.findOne({ email });
 
     if (!user) {
-      return res.status(404).json({ message: 'User not found' });
+      return res.status(404).json({ message: "User not found" });
     }
 
     // Check if the entered password matches the stored hashed password
     const passwordMatch = await bcrypt.compare(password, user.password);
 
     if (!passwordMatch) {
-      return res.status(401).json({ message: 'Invalid credentials' });
+      return res.status(401).json({ message: "Invalid credentials" });
     }
 
-    user.password=undefined;
+    user.password = undefined;
     const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET_USER, {
-      expiresIn: '1h', // You can adjust the expiration time
+      expiresIn: "1h", // You can adjust the expiration time
     });
 
     res.status(200).json({ token, user }); // Combine token and user into a single object
