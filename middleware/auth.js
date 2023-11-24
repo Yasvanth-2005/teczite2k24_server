@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import dotenv from 'dotenv';
+import dotenv from "dotenv";
 dotenv.config();
 export const verifyToken = async (req, res, next) => {
   try {
@@ -26,7 +26,7 @@ export const verifyUserToken = async (req, res, next) => {
     let token = req.header("Authorization");
 
     if (!token) {
-      return res.status(403).send("Access Denied");
+      return res.status(200).json({ jwtError: "Invalid Session" });
     }
 
     if (token.startsWith("Bearer ")) {
@@ -37,6 +37,6 @@ export const verifyUserToken = async (req, res, next) => {
     req.user = verified;
     next();
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.status(200).json({ jwtError: "Invalid Session" });
   }
 };

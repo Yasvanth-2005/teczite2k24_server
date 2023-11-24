@@ -5,56 +5,67 @@ dotenv.config();
 import User from "../../models/User/User.js";
 
 /* REGISTER USER */
-/* REGISTER USER */
 export const register = async (req, res) => {
   try {
-    const { email, name, password, collegeId, referredBy } = req.body;
+    const { email, name, password, collegeId, referredBy, onBoarded } =
+      req.body;
 
     // Check if password is provided
     if (!password) {
-      return res.status(400).json({ message: "Password is required" });
+      return res.status(400).json({ errMessage: "Password is required" });
+    }
+
+    const user = await User.findOne({ email: email });
+    if (user) {
+      return res.status(200).json({ errMessage: "User Already Exists" });
     }
 
     // Hash the password
     const hashedPassword = await bcrypt.hash(password, 10);
 
     // Create a new user instance
-    const newUser = new User({
+    const newUser = await User.create({
       email,
       name,
       collegeId,
       referredBy,
-      password: hashedPassword, // Set the hashed password directly
+      password: hashedPassword,
+      onBoarded,
     });
 
-    // Save the user to the database
-    await newUser.save();
+    const token = jwt.sign(
+      { userId: newUser._id },
+      process.env.JWT_SECRET_USER,
+      {
+        expiresIn: "1h",
+      }
+    );
 
-    // Send response with the success message and user details
     res
       .status(200)
-      .json({ message: "User created successfully", user: newUser });
+      .json({ message: "User created successfully", user: newUser, token });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    res.status(500).json({ errMessage: "Internal Server Error" });
   }
 };
 
-/* LOGGING IN */ export const login = async (req, res) => {
+/* LOGGING IN */
+export const login = async (req, res) => {
   try {
     const { email, password } = req.body;
 
     // Find the user by email
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email: email });
 
     if (!user) {
-      return res.status(404).json({ message: "User not found" });
+      return res.status(200).json({ errMessage: "Invalid Email / Password" });
     }
 
     // Check if the entered password matches the stored hashed password
-    const passwordMatch = await bcrypt.compare(password, user.password);
+    const passwordMatch = bcrypt.compare(password, user.password);
 
     if (!passwordMatch) {
-      return res.status(401).json({ message: "Invalid credentials" });
+      return res.status(200).json({ errMessage: "Invalid Email / Password" });
     }
 
     user.password = undefined;
@@ -64,6 +75,7 @@ export const register = async (req, res) => {
 
     res.status(200).json({ token, user }); // Combine token and user into a single object
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    console.log(error);
+    res.status(200).json({ error: "Internal Error" });
   }
 };

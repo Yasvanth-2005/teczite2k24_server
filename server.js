@@ -23,6 +23,7 @@ import userauthRoutes from "./routes/userauth.js";
 import { newEventUpload } from "./controllers/admin/Events.js";
 import { newWorkshopUpload } from "./controllers/admin/Workshop.js";
 import { NewNotify } from "./controllers/admin/Notify.js";
+import User from "./models/User/User.js";
 
 /* CONFIGURATIONS */
 const __filename = fileURLToPath(import.meta.url);
@@ -93,3 +94,20 @@ app.use("/user/auth", userauthRoutes);
 app.use("/user/notifications", verifyUserToken, usernotifyRoutes);
 app.use("/user/events", verifyUserToken, usereventsRoutes);
 app.use("/user/workshops", verifyUserToken, userworkshopRoutes);
+
+/*Get User*/
+app.get("/user", verifyUserToken, async (req, res) => {
+  try {
+    const user = await User.findById(req.user.userId);
+    if (!user) {
+      return res.status(200).json({ errMessage: "User not found" });
+    }
+    user.password = undefined;
+    return res.status(200).json({ user });
+  } catch (error) {
+    console.log(error);
+    return res
+      .status(200)
+      .json({ errMessage: "Internal Server Error " + error.message });
+  }
+});
