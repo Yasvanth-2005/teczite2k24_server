@@ -55,14 +55,16 @@ export const login = async (req, res) => {
     const { email, password } = req.body;
 
     // Find the user by email
-    const user = await User.findOne({ email: email });
+    const user = await User.findOne({ email: email }).populate(
+      "RegisteredEvents"
+    );
 
     if (!user) {
       return res.status(200).json({ errMessage: "Invalid Email / Password" });
     }
 
     // Check if the entered password matches the stored hashed password
-    const passwordMatch = bcrypt.compare(password, user.password);
+    const passwordMatch = await bcrypt.compare(password, user.password);
 
     if (!passwordMatch) {
       return res.status(200).json({ errMessage: "Invalid Email / Password" });

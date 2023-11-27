@@ -44,7 +44,7 @@ export const fetchAllEvents = async (req, res) => {
 
     res.status(200).json(allEvents);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    res.status(500).json({ message: "Internal Server error" });
   }
 };
 
@@ -60,7 +60,7 @@ export const fetchEventById = async (req, res) => {
 
     res.status(200).json(event);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    res.status(500).json({ message: "Internal Server error" });
   }
 };
 
@@ -105,6 +105,6 @@ export const editEvent = async (req, res) => {
 
     res.status(200).json(updatedEvent);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    res.status(500).json({ message: "Internal Server error" });
   }
 };

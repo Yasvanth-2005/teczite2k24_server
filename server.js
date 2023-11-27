@@ -98,16 +98,18 @@ app.use("/user/workshops", verifyUserToken, userworkshopRoutes);
 /*Get User*/
 app.get("/user", verifyUserToken, async (req, res) => {
   try {
-    const user = await User.findById(req.user.userId);
+    const user = await User.findById(req.user.userId).populate(
+      "RegisteredEvents"
+    );
     if (!user) {
-      return res.status(200).json({ errMessage: "User not found" });
+      return res.status(401).json({ message: "User not found" });
     }
     user.password = undefined;
     return res.status(200).json({ user });
   } catch (error) {
     console.log(error);
     return res
-      .status(200)
-      .json({ errMessage: "Internal Server Error " + error.message });
+      .status(401)
+      .json({ message: "Internal Server Error " + error.message });
   }
 });

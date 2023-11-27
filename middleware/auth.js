@@ -26,7 +26,7 @@ export const verifyUserToken = async (req, res, next) => {
     let token = req.header("Authorization");
 
     if (!token) {
-      return res.status(200).json({ jwtError: "Invalid Session" });
+      return res.status(404).json({ message: "Invalid Session" });
     }
 
     if (token.startsWith("Bearer ")) {
@@ -37,6 +37,6 @@ export const verifyUserToken = async (req, res, next) => {
     req.user = verified;
     next();
   } catch (err) {
-    res.status(200).json({ jwtError: "Invalid Session" });
+    res.status(500).json({ message: "Invalid Session" });
   }
 };
