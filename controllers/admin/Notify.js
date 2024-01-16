@@ -1,4 +1,4 @@
-import Notification from '../../models/admin/Notification.js'
+import Notification from "../../models/admin/Notification.js";
 
 export const NewNotify = async (req, res) => {
   try {
@@ -8,7 +8,7 @@ export const NewNotify = async (req, res) => {
       heading,
       info,
       picturePath,
-      link
+      link,
     });
 
     const savedNotification = await newNotification.save();
@@ -51,7 +51,10 @@ export const deleteNotify = async (req, res) => {
 
     res
       .status(200)
-      .json({ message: "Notification deleted successfully", deletedNotification });
+      .json({
+        message: "Notification deleted successfully",
+        deletedNotification,
+      });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -59,8 +62,7 @@ export const deleteNotify = async (req, res) => {
 
 export const DisplayNotify = async (req, res) => {
   try {
-    const allNotifications = await Notification.find()
-      .sort({ date: -1 }); // Sort by the 'date' field in descending order
+    const allNotifications = await Notification.find().sort({ date: -1 }); // Sort by the 'date' field in descending order
 
     if (!allNotifications || allNotifications.length === 0) {
       return res.status(404).json({ message: "No notifications found" });
@@ -73,8 +75,7 @@ export const DisplayNotify = async (req, res) => {
 };
 export const DisplaySingleNotify = async (req, res) => {
   try {
-    const latestNotification = await Notification.findOne()
-      .sort({ date: -1 }); // Sort by the 'date' field in descending order
+    const latestNotification = await Notification.findOne().sort({ date: -1 });
 
     if (!latestNotification) {
       return res.status(404).json({ message: "No notifications found" });

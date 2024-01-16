@@ -91,7 +91,7 @@ app.use("/admin/workshops", verifyToken, workshopRoutes);
 
 /* User Routes */
 app.use("/user/auth", userauthRoutes);
-app.use("/user/notifications", verifyUserToken, usernotifyRoutes);
+app.use("/user/notifications", usernotifyRoutes);
 app.use("/user/events", verifyUserToken, usereventsRoutes);
 app.use("/user/workshops", verifyUserToken, userworkshopRoutes);
 

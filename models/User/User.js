@@ -32,7 +32,7 @@ const UserSchema = new mongoose.Schema({
   RegisteredEvents: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Event",
+      ref: "Competitions",
     },
   ],
 });
